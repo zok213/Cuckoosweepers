@@ -73,11 +73,9 @@ sync-to-hub:
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
-        git pull https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/Zok213/Cuckoosweeper main --rebase || git rebase --abort
+        git pull https://HF_USERNAME:$HF_TOKEN@huggingface.co/spacesZok213/Cuckoosweepers main --rebase || git rebase --abort
     - name: Force Push to Hugging Face
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      run: git push --force https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/Zok213/Cuckoosweeper main
+      run: git push --force https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/Zok213/Cuckoosweepers main
 
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/Zok213/Cuckoosweeper main
