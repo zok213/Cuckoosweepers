@@ -57,27 +57,30 @@ jobs:
         publish_branch: gh-pages
         force_orphan: true
 
-sync-to-hub:
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v3
+  sync-to-hub:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
         lfs: true
+    
     - name: Set up Git user info
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
     - name: Pull from Hugging Face (abort on conflict)
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
-        git pull https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/Zok213/Cuckoosweeper main --rebase || git rebase --abort
+        git pull https://Zok213:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/Zok213/Cuckoosweepers main --rebase || git rebase --abort
+    
     - name: Force Push to Hugging Face
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      run: git push --force https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/Zok213/Cuckoosweeper main
-
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/Zok213/Cuckoosweeper main
+      run: |
+        git push --force https://Zok213:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/Zok213/Cuckoosweepers main
