@@ -232,7 +232,7 @@ class Game {
     document.getElementById('moves').textContent = '0';
     document.querySelector('.wrapper').classList.remove('won', 'lost');
     document.querySelector('.result-emoji').textContent = '';
-    document.querySelector('.default-emoji').textContent = 'Cuckoosweepers 🐦‍⬛🧹';
+    document.querySelector('.default-emoji').textContent = 'Cuckoosweepers ';
     document.querySelector('.js-settings').style.display = 'none';
   }
 
