@@ -233,7 +233,7 @@ class Game {
     document.querySelector('.wrapper').classList.remove('won', 'lost');
     document.querySelector('.result-emoji').textContent = '';
     document.querySelector('.default-emoji').textContent = 'Cuckoosweepers ';
-    document.querySelector('.js-settings').style.display = 'none';
+    document.querySelector('.js-settings').style.display = 'block';
   }
 
   updateBombsLeft() {
@@ -279,7 +279,43 @@ class Game {
   }
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const emojiSet = ['🐣', '🐦‍⬛', '🧹', '⬜']; 
-//   const game = new Game(10, 10, 10, emojiSet); 
-// });
+window.onload = function() {
+  showIntroduction();
+};
+
+document.getElementById('show-introduction').addEventListener('click', function() {
+  showIntroduction();
+});
+
+function showIntroduction() {
+  Swal.fire({
+    title: 'Chào mừng đến với Cuckoosweepers!',
+    html: `
+      <p>Bạn vào vai một chú quạ, vừa trở về tổ sau một chuyến đi dài. Khi nhìn vào tổ, bạn phát hiện có những quả trứng lạ. Đó là trứng của chim cút cu - loài chim chuyên đẻ nhờ tổ của các loài khác!</p>
+      <p>Nhiệm vụ của bạn là giúp quạ tìm ra tất cả trứng quạ mà không chạm vào trứng chim cút cu. Nếu mở hết trứng quạ, quạ sẽ phát hiện ra trứng chim cút cu và đưa chúng sang tổ khác.</p>
+    `,
+    imageUrl: 'https://i.imgur.com/BjnLZXW.png',
+    imageAlt: 'Quạ và trứng',
+    showCancelButton: true,
+    confirmButtonText: 'Tiếp tục',
+    cancelButtonText: 'Thoát',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: 'Luật chơi cơ bản',
+        html: `
+          <p><strong>Mục tiêu:</strong> Giúp quạ tìm tất cả trứng của mình mà không chọn nhầm trứng chim cút cu.</p>
+          <ul style="text-align: left;">
+            <li>Khi mở đúng trứng quạ, số hiện ra sẽ cho biết có bao nhiêu trứng chim cút cu 🐦‍⬛ nằm xung quanh ô đó (tương tự như Minesweeper).</li>
+            <li>Nếu bạn mở một ô và nó trống, có nghĩa là không có trứng chim cút cu xung quanh. Icon mở ra sẽ là <strong>'🐣'</strong>.</li>
+            <li>Nếu chọn phải trứng chim cút cu 🐦‍⬛, trò chơi sẽ kết thúc.</li>
+            <li>Nếu bạn mở đúng tất cả trứng quạ, toàn bộ trứng chim cút cu sẽ được dọn dẹp <strong>'🧹'</strong> và trò chơi kết thúc.</li>
+          </ul>
+        `,
+        confirmButtonText: 'Bắt đầu chơi',
+        cancelButtonText: 'Thoát',
+        showCancelButton: true,
+      });
+    }
+  });
+}

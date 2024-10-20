@@ -14,6 +14,7 @@
         font-size: 15px;
         text-align: center;
         padding: 20px 0;
+        font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 
       }
 
       span, input, a, div, button {
@@ -236,10 +237,6 @@
         display: block;
       }
 
-      .settings-popup.show ~ * {
-        visibility: hidden;
-      }
-
       .feedback {
         font-size: 1px;
         width: 1px;
@@ -253,12 +250,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <button type="button" class="settings js-settings" aria-haspopup="true" aria-expanded="false" aria-label="Settings"></button>
-      <div class="js-settings-popup settings-popup">
-        <div class="flex">
-          <label class="btn flex-cell" aria-label="Use Twitter Emoji"><input type="radio" name="emoji" id="twemoji" checked> Twemoji</label>
-          <label class="btn flex-cell" aria-label="Use Native Emoji"><input type="radio" name="emoji" id="emoji"> Native emoji</label>
-        </div>
+      <button type="button" class="settings js-settings btn btn-primary" id="show-introduction"aria-haspopup="true" aria-expanded="false" aria-label="Settings"></button>
         <div class="flex">
           <input id="cols" class="input flex-cell" type="number" value="10" min="1" max="500" aria-label="Columns">
           <div class="flex-cell divider">&times;</div>
@@ -285,6 +277,7 @@
     </div>
     <div aria-live="assertive" class="feedback"></div>
     <script src="/game.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script >
       let emojiset = document.getElementById('emojiset').value.split(' ');
       let cols = document.getElementById('cols');
