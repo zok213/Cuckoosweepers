@@ -328,7 +328,7 @@ function showPopup() {
     html: `
       <div class="grid-1">
         <div class="panel panel-title">
-          <h1>Cuckoosweepers</h1>
+          <h1>Mysterious Eggs</h1>
           <p>In a distant place, there is a crow family living happily with their soon-to-hatch eggs.</p>
         </div>
         <div class="panel panel-1"></div>
