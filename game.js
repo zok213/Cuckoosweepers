@@ -233,7 +233,6 @@ class Game {
     document.querySelector('.wrapper').classList.remove('won', 'lost');
     document.querySelector('.result-emoji').textContent = '';
     document.querySelector('.default-emoji').textContent = 'Cuckoosweepers ';
-    document.querySelector('.js-settings').style.display = 'block';
   }
 
   updateBombsLeft() {
@@ -279,12 +278,17 @@ class Game {
   }
 }
 
-window.onload = function() {
-  showIntroduction();
-};
+// document.addEventListener('DOMContentLoaded', () => {
+//   const emojiSet = ['🐣', '🐦‍⬛', '🧹', '⬜']; 
+//   const game = new Game(10, 10, 10, emojiSet); 
+// });
 
 document.getElementById('show-introduction').addEventListener('click', function() {
   showIntroduction();
+});
+
+document.getElementById('showpopup').addEventListener('click', function() {
+  showPopup();
 });
 
 function showIntroduction() {
@@ -292,9 +296,8 @@ function showIntroduction() {
     title: 'Chào mừng đến với Cuckoosweepers!',
     html: `
       <p>Bạn vào vai một chú quạ, vừa trở về tổ sau một chuyến đi dài. Khi nhìn vào tổ, bạn phát hiện có những quả trứng lạ. Đó là trứng của chim cút cu - loài chim chuyên đẻ nhờ tổ của các loài khác!</p>
-      <p>Nhiệm vụ của bạn là giúp quạ tìm ra tất cả trứng quạ mà không chạm vào trứng chim cút cu. Nếu mở hết trứng quạ, quạ sẽ phát hiện ra trứng chim cút cu và đưa chúng sang tổ khác.</p>
+      <p>Nhiệm vụ của bạn là giúp quạ tìm ra tất cả trứng quạ mà không chạm vào trứng chim cút cu.</p>
     `,
-    imageUrl: 'https://i.imgur.com/BjnLZXW.png',
     imageAlt: 'Quạ và trứng',
     showCancelButton: true,
     confirmButtonText: 'Tiếp tục',
@@ -302,6 +305,7 @@ function showIntroduction() {
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
+        imageUrl: '/assets/1.svg',
         title: 'Luật chơi cơ bản',
         html: `
           <p><strong>Mục tiêu:</strong> Giúp quạ tìm tất cả trứng của mình mà không chọn nhầm trứng chim cút cu.</p>
@@ -317,5 +321,36 @@ function showIntroduction() {
         showCancelButton: true,
       });
     }
+  });
+}
+function showPopup() {
+  Swal.fire({
+    html: `
+      <div class="grid-1">
+        <div class="panel panel-title">
+          <h1>Cuckoosweepers</h1>
+          <p>In a distant place, there is a crow family living happily with their soon-to-hatch eggs.</p>
+        </div>
+        <div class="panel panel-1"></div>
+        <div class="panel panel-2"></div>
+        <div class="panel panel-3">
+          <p>“I'm starving ,I should probably get some food.”</p>
+        </div>
+        <div class="panel panel-4"></div>
+        <div class="panel panel-5"></div>
+        <div class="panel panel-6"></div>
+        <div class="panel panel-7">
+          <p>“Something is wrong”</p>
+        </div>
+        <div class="panel panel-8"></div>
+        <div class="panel panel-9"></div>
+      </div>
+    `,
+    width: '90%',
+    customClass: {
+      popup: 'custom-swal-popup'
+    },
+    showCloseButton: true,
+    showConfirmButton: false
   });
 }

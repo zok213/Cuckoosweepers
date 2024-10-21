@@ -212,7 +212,20 @@
         cursor: pointer;
         z-index: 1;
       }
-
+      .s {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: -20px;
+        right: 250px;
+        background-color: #f4f4f4;
+        text-align: center;
+        border-radius: 25px;
+        padding: 2px 8px;
+        border: 5px solid #fff;
+        cursor: pointer;
+        z-index: 1;
+      }
       .settings .emoji {
         width: 15px;
         margin: 6px 0;
@@ -237,6 +250,10 @@
         display: block;
       }
 
+      .settings-popup.show ~ * {
+        visibility: hidden;
+      }
+
       .feedback {
         font-size: 1px;
         width: 1px;
@@ -246,11 +263,174 @@
         left: -1px;
         top: -1px;
       }
+                  
+      h1 {
+        margin: 0;
+        line-height: 1;
+        padding: 10px;
+        color: #251b19;
+      }
+
+      p {
+        margin: 0;
+        padding: 10px;
+        color: #251b19;
+        font-size: 1.2em;
+      }
+
+      a {
+        color: #e56633;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+
+      /* the grid */
+      .grid-1 {
+        display: grid;
+        width: 100%;
+        max-width: 770px;
+        margin: 10% auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 200px 200px auto 200px 200px 200px auto 200px 200px auto;
+        grid-gap: 25px;
+      }
+
+      /* panels */
+      .panel {
+        color: white;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        box-shadow: 0 0px 0px 5px #251b19;
+      }
+
+      /* individual panels */
+      .panel-title {
+        box-shadow: none;
+      }
+      .panel-1 {
+        background-image: url(/assets/1.svg);
+        box-shadow: none;
+      }
+      .panel-2 {
+        background-image: url(/assets/2.svg);
+      }
+      .panel-3 {
+        box-shadow: none;
+      }
+      .panel-4 {
+        background-image: url(/assets/3.svg);
+      }
+      .panel-5 {
+        background-image: url(/assets/4.svg);
+      }
+      .panel-6 {
+        background-image: url(/assets/5.svg);
+      }
+      .panel-7 {
+        box-shadow: none;
+      }
+      .panel-8 {
+        background-image: url(/assets/6.svg);
+      }
+      .panel-9 {
+        background-image: url(/assets/7.svg);
+        box-shadow: none;
+      }
+      .panel-copyright {
+        box-shadow: none;
+        font-size: .75em;
+      }
+
+      /* media query 1 */
+      @media only screen and (min-width: 400px) {
+        .grid-1 {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: auto 200px auto 200px 200px auto 200px auto;
+        }  
+        .panel-title,
+        .panel-3,
+        .panel-6,
+        .panel-7,
+        .panel-copyright {
+          grid-column: span 2;
+        }
+        .panel-copyright {
+          text-align: right;
+        }
+        .panel-7 {
+          text-align: center;
+        }
+        h1 {
+          font-size: 3em;
+        }
+      }
+
+      /* media query 2 */
+      @media only screen and (min-width: 600px) {
+        .grid-1 {
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: auto 200px 200px 200px auto;
+        }
+        .panel-title,
+        .panel-copyright {
+          grid-column: span 3;
+        }
+        .panel-3,
+        .panel-6 {
+          grid-column: auto;
+        }
+        .panel-8 {
+          grid-column: span 2;
+        }
+        h1 {
+          font-size: 3.5em;
+        }
+        p {
+          font-size: 1.3em;
+        }
+
+        /* flexbox centering */
+        .panel-3 {  
+          display: flex;
+          align-items: center;
+        }
+
+        /* layering */
+        .panel-7 {
+          grid-column: 1;
+          grid-row: 4;
+          z-index: 1;
+          margin: -5px 0 0 -10px;
+          transform: rotate(-2deg);
+        }
+
+        .panel-7 p {
+          background: #f8f7f2;
+          box-shadow: 0 0px 0px 5px #251b19;
+          text-align: left;
+        }
+
+        .panel-8 {
+          grid-column: 1 / span 2;
+          grid-row: 4;
+          background-size: 70%;
+          background-position: right;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="wrapper">
-      <button type="button" class="settings js-settings btn btn-primary" id="show-introduction"aria-haspopup="true" aria-expanded="false" aria-label="Settings"></button>
+      <button type="button" class="settings" aria-haspopup="true" aria-expanded="false" aria-label="Settings" id="show-introduction">❓</button>
+      <button type="button" class="s" aria-haspopup="true" aria-expanded="false" aria-label="s" id="showpopup">📖</button>
+      <div class="js-settings-popup settings-popup">
+        <div class="flex">
+          <label class="btn flex-cell" aria-label="Use Twitter Emoji"><input type="radio" name="emoji" id="twemoji" > Twemoji</label>
+          <label class="btn flex-cell" aria-label="Use Native Emoji"><input type="radio" name="emoji" id="emoji"> Native emoji</label>
+        </div>
         <div class="flex">
           <input id="cols" class="input flex-cell" type="number" value="10" min="1" max="500" aria-label="Columns">
           <div class="flex-cell divider">&times;</div>
